@@ -1,5 +1,17 @@
 # QuizzGame
 
+## The goal of this project is to create a quizz app in Python.
+
+In this app we will have to kind of user:
+ - Admin : who can create quizz
+ - User : Answer the quizz
+Some features are mandatory : 
+ - Be able to log up and log in
+ - Save of results 
+ - Show good answers and score
+
+
+
 ## Making changes and creating a PR
 
 If you are new to this sort of thing, check out this [free video course](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) by Kent C. Dodds about how to contribute to an open source project. It walks you through the basics of using git and GitHub to contribute to an open source project.
