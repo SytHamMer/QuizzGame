@@ -2,7 +2,7 @@
 
 ## The goal of this project is to create a quizz app in Python.
 
-In this app we will have to kind of user:
+In this app we will have two kinds of user:
  - Admin : who can create quizz.
  - User : Answer the quizz.
  
