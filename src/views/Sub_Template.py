@@ -10,5 +10,5 @@ class Sub_Template(Template):
 
     def __init__(self):
         super().__init__()
-        TopBar = Frame(self.getDocument(), bg=THEME['blue_topbar'], width=self.getWindow().winfo_width(), height=100)
+        TopBar = Frame(self.getDocument(), bg=THEME['blueTopbar'], width=self.getWindow().winfo_width(), height=100)
         TopBar.pack(side=TOP)
