@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS joue(
 """)
 
 
-
+conn.commit()
 
 conn.close()
 
