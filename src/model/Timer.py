@@ -13,7 +13,7 @@ class Timer:
     def end(self):
         return(int(time.time())- self.start)>self.timing
 
-    def get_time(self):
+    def getTime(self):
         """OUT: 
         A tuple:
         [0] : if timer is finish or not
@@ -31,8 +31,8 @@ if __name__ == "__main__":
     print(int(time.time()))
     test = Timer(10)
     time.sleep(2)
-    print(test.get_time())
+    print(test.getTime())
     time.sleep(3)
-    print(test.get_time())
+    print(test.getTime())
     time.sleep(2)
-    print(test.get_time())
+    print(test.getTime())
