@@ -5,5 +5,5 @@ from views.Game import Game
 app = App({
     'home': Home,
     'game': Game
-}, 'game')
+}, 'home')
 app.start()
