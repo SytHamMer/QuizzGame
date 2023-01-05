@@ -3,12 +3,13 @@
 ## The goal of this project is to create a quizz app in Python.
 
 In this app we will have to kind of user:
- - Admin : who can create quizz
- - User : Answer the quizz
+ - Admin : who can create quizz.
+ - User : Answer the quizz.
+ 
 Some features are mandatory : 
- - Be able to log up and log in
- - Save of results 
- - Show good answers and score
+   - Be able to log up and log in
+   - Save of results 
+   - Show good answers and score
 
 
 
