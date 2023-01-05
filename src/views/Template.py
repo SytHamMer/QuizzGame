@@ -10,9 +10,8 @@ class Template:
         window.title("Quizz")
         window.geometry('1080x720')
         window.minsize(600,400)
-        window.iconbitmap('../images/logo.png')
-        window.config(background="#FBF8EE")
-        # window.config(background=THEME['primary'])
+        window.iconbitmap('src/images/logo.ico')
+        window.config(background=THEME['primary'])
 
         document = Frame(window, bg=THEME['primary'])
         document.pack(expand=YES)
