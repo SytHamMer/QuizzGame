@@ -1,9 +1,9 @@
 from Template import Template
 
 tpl = Template()
-window = tpl.getWindow()
+document = tpl.getDocument()
 
-
+# customize things here
 
 tpl.display()
 

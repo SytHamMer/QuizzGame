@@ -1,5 +1,7 @@
 from tkinter import *
 
+from theme import THEME
+
 class Template:
 
     def __init__(self):
@@ -8,16 +10,18 @@ class Template:
         window.title("Quizz")
         window.geometry('1080x720')
         window.minsize(600,400)
-        # window.iconbitmap('logo.png')
+        window.iconbitmap('../images/logo.png')
+        window.config(background="#FBF8EE")
+        # window.config(background=THEME['primary'])
 
-        document = Frame(window, bg="white",width = 1600,height=50,relief=SUNKEN)
+        document = Frame(window, bg=THEME['primary'])
         document.pack(expand=YES)
 
         self.window = window
         self.document = document
 
     def __createTopBar(self):
-        Tops = Frame(self.document, bg="white",width = 1600,height=50,relief=SUNKEN)
+        Tops = Frame(self.document, bg=THEME['primary'],width = 1600,height=50,relief=SUNKEN)
         Tops.pack(side=TOP)
 
     def getWindow(self) -> Tk:
