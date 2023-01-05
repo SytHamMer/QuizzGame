@@ -22,8 +22,8 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS Utilisateur(
 
     pseudo TEXT PRIMARY KEY UNIQUE,
-    mdp VARCHAR(250),
-    estAdmin BOOLEAN,
+    mdp TEXT,
+    estAdmin NUMERIC,
     idScore INT,
     FOREIGN KEY(idScore) REFERENCES Score(idScore)
 
@@ -72,9 +72,8 @@ CREATE TABLE IF NOT EXISTS joue(
 """)
 
 
-
-
-
 conn.commit()
+
+conn.close()
 
 
