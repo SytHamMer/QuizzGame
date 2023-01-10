@@ -10,5 +10,5 @@ app = App({
     'signin' : SignIn,
     'signup' : SignUp
 
-}, 'home')
+}, 'signin')
 app.start()
