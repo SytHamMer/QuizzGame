@@ -1,4 +1,7 @@
 from tkinter import *
+from views.components.Topbar import Topbar
+from views.theme import THEME
+from views.components.LblEntry import LblEntry
 
 class SignUp:
     def __init__(self, app, document):
@@ -10,30 +13,26 @@ class SignUp:
         self.app.setCurrentFrame('game')
 
     def __render(self):
+
+        topbar = Topbar(self.document)
+        topbar.pack()
+        
+
         back = Frame(self.document,bg= "#7FB8ED", borderwidth=0,height=450,width=855)
         back.pack(expand=YES)
-
-        userLbl = Label(back, text='Username', bg='#7FB8ED', fg='#31468F', borderwidth=0, font=('Inter', 28))
-        userLbl.place(x=60, y=52)
-
-        userEntry=Entry(back, width=40, font=('arial',20))
-        userEntry.place(x=240, y=52)
-
-        pwLbl = Label(back, text='Password', bg='#7FB8ED', fg='#31468F', borderwidth=0, font=('Inter', 28))
-        pwLbl.place(x=60, y=152)
         
-        pwEntry= Entry(back, width=40, font=('arial',20))
-        pwEntry.place(x=240, y=152)
-
+        UserLblEntry = LblEntry(back,'Username', THEME['lightBlue'], '#31468F', 28, 40, 20).getFrame()
+        UserLblEntry.place(x=10, y=10)
         
+        pwLblEntry = LblEntry(back,'Password', THEME['lightBlue'], '#31468F',28, 40, 20).getFrame()
+        pwLblEntry.place(x=10, y=110)
+        
+        cpwLblEntry = LblEntry(back, 'Confirm\nPassword', THEME['lightBlue'], '#31468F', 28, 40,20).getFrame()
+        cpwLblEntry.place(x=10, y=210)
 
-        cpwLbl = Label(back, text='Confirm\n Password', bg='#7FB8ED', fg='#31468F', borderwidth=0, font=('Inter', 28))
-        cpwLbl.place(x=60, y=252)
+        checkAdmin = Checkbutton(back, text='Administrateur', bg=THEME['lightBlue'],fg=THEME['blueTopbar'], font=('inter', 20))
+        checkAdmin.place(x=10, y=300)
 
-        cpwEntry = Entry(back, width=40, font=('arial',20))
-        cpwEntry.place(x=240, y=262)
+        SignUpButton = Button(back, text='Sign Up',bg='#31468F', fg='white', activebackground='#052B71',  font=('Inter', 20), command=self.handleClick)
+        SignUpButton.place(x=350, y=360)
 
-        SignUpButton = Button(back, text='Sign Up',bg='#31468F', fg='white', activebackground='#052B71',  font=('Inter', 40), command=self.handleClick)
-        SignUpButton.place(x=350, y=320)
-
-        pass
