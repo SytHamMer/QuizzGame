@@ -2,7 +2,7 @@ import sqlite3
 
 
 def connect():
-    return sqlite3.connect('src/data.db')
+    return sqlite3.connect('../data.db')
 
 
 def createTables() -> None:
@@ -51,14 +51,19 @@ def createTables() -> None:
     connection.commit()
     connection.close()
 
-# def query(sql: str) -> None:
-    # connection = connect()
-#     cursor = connection.cursor()
+def connect_user(sql: str, username, password) -> None:
+    connection = connect()
+    cursor = connection.cursor()
 
-#     # cursor.execute(sql)
+    res = cursor.execute(f'select pseudo, mdp from utilisateur where pseudo={username} and mdp={password}')
 
-#     connection.commit()
-#     connection.close()
+    if len(res.fetchone()) == 0:
+        return False
+    else:
+        return res.fetchone()
+    
+    connection.commit()
+    
 
 
 # def queryQuestions(quizzName):
