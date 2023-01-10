@@ -51,19 +51,29 @@ def createTables() -> None:
     connection.commit()
     connection.close()
 
-def connect_user(sql: str, username, password) -> None:
+def connect_user(username :str, password : str) -> False or list:
     connection = connect()
     cursor = connection.cursor()
-
-    res = cursor.execute(f'select pseudo, mdp from utilisateur where pseudo={username} and mdp={password}')
-
-    if len(res.fetchone()) == 0:
+    
+    
+    res = cursor.execute("""select pseudo,mdp from Utilisateur where pseudo=? and mdp=?""", (username,password))
+    connection.commit()    
+    
+    res = res.fetchone()
+    connection.close()
+    
+    if res == None:
         return False
     else:
-        return res.fetchone()
+        return res
     
-    connection.commit()
     
+    
+        
+    
+    
+if __name__ == '__main__':
+    print((connect_user('linki', 'polytech')))
 
 
 # def queryQuestions(quizzName):
