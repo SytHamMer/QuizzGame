@@ -16,12 +16,13 @@ class App:
         documents = {}
 
         for slug in pages.keys():
-            documents[slug] = Frame(window, bg=THEME['primary'])
+            doc = Frame(window, bg=THEME['primary'])
+            documents[slug] = doc
             pageDefiner = pages[slug]
-            pageDefiner(self, documents[slug])
-            documents[slug].pack(expand=YES)
-            documents[slug].place(in_=window, x=0, y=0,
-                                  relwidth=1, relheight=1)
+            pageDefiner(self, doc)
+            doc.pack(expand=YES)
+            doc.place(in_=window, x=0, y=0,
+                      relwidth=1, relheight=1)
 
         """ 
         Enable to know which frame is associatied to a page slug.
@@ -46,7 +47,10 @@ class App:
         return self.window
 
     def getDocument(self, slug) -> Frame:
-        return self.documents[slug]
+        doc = self.documents[slug]
+        if (doc == None):
+            raise Exception("No document is linked to the slug " + slug)
+        return doc
 
     def setCurrentFrame(self, slug) -> None:
         """Update the render of the App
@@ -55,7 +59,7 @@ class App:
             slug (string): Slug of the new page.
         """
         for currentSlug in self.pages.keys():
-            currentDoc = self.documents[currentSlug]
+            currentDoc = self.getDocument(currentSlug)
             if (currentSlug == slug):
                 currentDoc.lift()
 
