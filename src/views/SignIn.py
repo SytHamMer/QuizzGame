@@ -1,11 +1,11 @@
 from tkinter import *
-from components.Topbar import Topbar
+from views.components.Topbar import Topbar
 class SignIn:
     def __init__(self, app, document):
         self.app = app
         self.document = document
         self.__render()
-
+        
     def handleClick(self) -> None:
         self.app.setCurrentFrame('game')
 
