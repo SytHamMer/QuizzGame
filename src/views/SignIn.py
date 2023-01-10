@@ -1,5 +1,5 @@
 from tkinter import *
-
+from components.Topbar import Topbar
 class SignIn:
     def __init__(self, app, document):
         self.app = app
@@ -10,6 +10,10 @@ class SignIn:
         self.app.setCurrentFrame('game')
 
     def __render(self):
+
+        topbar = Topbar(self.document)
+        topbar.pack()
+
         back = Frame(self.document,bg= "#7FB8ED", borderwidth=0,height=450,width=855)
         back.pack(expand=YES)
 
