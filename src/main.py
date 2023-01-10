@@ -2,10 +2,13 @@ from views.App import App
 from views.Home import Home
 from views.Game import Game
 from views.SignIn import SignIn
+from views.SignUp import SignUp
 
 app = App({
     'home': Home,
     'game': Game,
-    'signin' : SignIn
-}, 'signin')
+    'signin' : SignIn,
+    'signup' : SignUp
+
+}, 'home')
 app.start()
