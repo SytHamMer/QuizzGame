@@ -1,10 +1,11 @@
-#from dbHandler import createTables
+from dbHandler import createTables
 from views.App import App
 from views.Home import Home
 from views.Game import Game
 from views.SignIn import SignIn
 from views.SignUp import SignUp
 
+createTables()
 
 
 app = App({

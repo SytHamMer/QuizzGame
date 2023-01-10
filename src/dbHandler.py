@@ -2,7 +2,7 @@ import sqlite3
 
 
 def connect():
-    return sqlite3.connect('src/data.db')
+    return sqlite3.connect('../data.db')
 
 
 def createTables() -> None:
