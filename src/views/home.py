@@ -1,5 +1,7 @@
 from tkinter import *
 
+from views.components.Topbar import Topbar
+
 
 class Home:
     def __init__(self, app, document):
@@ -11,6 +13,9 @@ class Home:
         self.app.setCurrentFrame('game')
 
     def __render(self) -> None:
+        topbar = Topbar(self.document)
+        topbar.pack()
+
         lblDrinks = Label(self.document, font=('aria', 16, 'bold'),
                           text="Home page", fg="steel blue", bd=10, anchor='w')
         lblDrinks.pack()
