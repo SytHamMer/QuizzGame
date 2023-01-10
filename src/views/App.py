@@ -10,7 +10,6 @@ class App:
         window.title("Quizz")
         window.geometry('1080x720')
         window.minsize(600, 400)
-        window.iconbitmap('src/views/logo.ico')
         window.config(background=THEME['primary'])
 
         documents = {}
