@@ -13,6 +13,7 @@ class SignIn:
 
         topbar = Topbar(self.document)
         topbar.pack()
+        
 
         back = Frame(self.document,bg= "#7FB8ED", borderwidth=0,height=450,width=855)
         back.pack(expand=YES)
@@ -31,7 +32,7 @@ class SignIn:
 
         
 
-        SignInButton = Button(back, text='Sign In',bg='#31468F', fg='white', activebackground='#052B71',  font=('Inter', 40), command=self.handleClick)
-        SignInButton.place(x=350, y=320)
+        SignInButton = Button(back, text='Sign In',bg='#31468F', fg='white', activebackground='#052B71',  font=('Inter', 20), command=self.handleClick)
+        SignInButton.place(x=350, y=360)
 
         pass
