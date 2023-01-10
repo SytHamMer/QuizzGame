@@ -7,6 +7,7 @@ from views.SignUp import SignUp
 
 createTables()
 
+
 app = App({
     'home': Home,
     'game': Game,
