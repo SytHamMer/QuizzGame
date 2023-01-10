@@ -36,4 +36,3 @@ class SignUp:
         SignUpButton = Button(back, text='Sign Up',bg='#31468F', fg='white', activebackground='#052B71',  font=('Inter', 20), command=self.handleClick)
         SignUpButton.place(x=350, y=360)
 
-        
