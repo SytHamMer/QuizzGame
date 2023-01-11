@@ -2,7 +2,7 @@ import sqlite3
 
 
 def connect():
-    return sqlite3.connect('../data.db')
+    return sqlite3.connect('src/data.db')
 
 
 def createTables() -> None:
@@ -56,7 +56,7 @@ def connect_user(username :str, password : str) -> False or list:
     cursor = connection.cursor()
     
     
-    res = cursor.execute("""select pseudo,mdp from Utilisateur where pseudo=? and mdp=?""", (username,password))
+    res = cursor.execute("""select pseudo,mdp, estAdmin from Utilisateur where pseudo=? and mdp=?""", (username,password))
     connection.commit()    
     
     res = res.fetchone()
@@ -67,13 +67,26 @@ def connect_user(username :str, password : str) -> False or list:
     else:
         return res
     
-    
+def create_account(username :str, password : str,confirmPassword, estAdmin : int)-> None:
+    connection = connect()
+    cursor = connection.cursor()
+    try:
+        if password == confirmPassword:
+            cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''', (username, password, estAdmin))
+            connection.commit()
+            connection.close()
+            return (username, password, estAdmin)
+        else:
+            return False
+
+    except sqlite3.IntegrityError: #si l'utilisateur existe déjà
+        return False
     
         
     
     
 if __name__ == '__main__':
-    print((connect_user('linki', 'polytech')))
+    print((create_account('freeze', 'polytech', 'polytech', 1)))
 
 
 # def queryQuestions(quizzName):
