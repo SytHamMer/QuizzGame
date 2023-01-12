@@ -15,7 +15,7 @@ app = App({
     'game': Game,
     'signin': SignIn,
     'signup': SignUp,
-    'creation' : CreationQuizz,
+    'creation': CreationQuizz,
     'score': ScoreView
 }, 'creation')
 
