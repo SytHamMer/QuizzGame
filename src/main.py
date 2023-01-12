@@ -14,5 +14,5 @@ app = App({
     'signin': SignIn,
     'signup': SignUp
 
-}, 'game')
+}, 'signin')
 app.start()

@@ -24,10 +24,10 @@ class SignUp:
         UserLblEntry = LblEntry(back,'Username', THEME['lightBlue'], '#31468F', 28, 40, 20).getFrame()
         UserLblEntry.place(x=10, y=10)
         
-        pwLblEntry = LblEntry(back,'Password', THEME['lightBlue'], '#31468F',28, 40, 20).getFrame()
+        pwLblEntry = LblEntry(back,'Password', THEME['lightBlue'], '#31468F',28, 40, 20, True).getFrame()
         pwLblEntry.place(x=10, y=110)
         
-        cpwLblEntry = LblEntry(back, 'Confirm\nPassword', THEME['lightBlue'], '#31468F', 28, 40,20).getFrame()
+        cpwLblEntry = LblEntry(back, 'Confirm\nPassword', THEME['lightBlue'], '#31468F', 28, 40,20, True).getFrame()
         cpwLblEntry.place(x=10, y=210)
 
         checkAdmin = Checkbutton(back, text='Administrateur', bg=THEME['lightBlue'],fg=THEME['blueTopbar'], font=('inter', 20))
