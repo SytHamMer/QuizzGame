@@ -32,6 +32,11 @@ class Game:
     def __render(self):
 
         def update_label(remaining):
+            """Countdown        
+
+            Args:
+                remaining (int): timeleft
+            """
             self.timer = remaining
             if remaining != 0:
                 self.timer =remaining
