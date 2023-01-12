@@ -13,10 +13,9 @@ class LblEntry(Frame):
 
         if show:
             self.entry = Entry(self, width=entWidth,
-                               font=('arial', sizeEnt), show='*')
+                               font=('inter', sizeEnt), show='*')
         else:
-            self.entry = Entry(self, width=entWidth,
-                               font=('arial', sizeEnt))
+            self.entry = Entry(self, width=entWidth, font=('inter', sizeEnt))
         self.lbl.pack(side="left")
         self.entry.pack(side="right")
     

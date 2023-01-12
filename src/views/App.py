@@ -1,37 +1,19 @@
 from tkinter import *
 from views.theme import THEME
+from views.TabSystem import TabSystem
 
 
-class App:
+class App(TabSystem):
 
     def __init__(self, pages, defaultPage):
         window = Tk()
+        super().__init__(window, pages, defaultPage)
 
         window.title("Quizz")
         window.geometry('1080x720')
         window.minsize(600, 400)
         window.config(background=THEME['primary'])
 
-        documents = {}
-
-        for slug in pages.keys():
-            doc = Frame(window, bg=THEME['primary'])
-            documents[slug] = doc
-            pageDefiner = pages[slug]
-            pageDefiner(doc)
-            doc.pack(expand=YES)
-            doc.place(in_=window, x=0, y=0,
-                      relwidth=1, relheight=1)
-
-        """ 
-        Enable to know which frame is associatied to a page slug.
-        """
-        self.documents = documents
-
-        """ 
-        Enable to know which frame is associatied to a pageDefiner.
-        """
-        self.pages = pages
         """
         Slug of the current displayed frame.
         """
@@ -45,27 +27,13 @@ class App:
     def getWindow(self) -> Tk:
         return self.window
 
-    def getDocument(self, slug) -> Frame:
-        doc = self.documents[slug]
-        if (doc == None):
-            raise Exception("No document is linked to the slug " + slug)
-        return doc
-
     def setCurrentFrame(self, slug) -> None:
         """Update the render of the App
 
         Args:
             slug (string): Slug of the new page.
         """
-        for currentSlug in self.pages.keys():
-            currentDoc = self.getDocument(currentSlug)
-            if (currentSlug == slug):
-                currentDoc.lift()
-
-        self.currentFrame = slug
-
-    def getCurrentFrame(self) -> str:
-        return self.currentFrame
+        self.setTab(slug)
 
     def start(self) -> None:
         self.window.mainloop()
