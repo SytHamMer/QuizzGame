@@ -1,9 +1,16 @@
 import sqlite3
 import os
 
+def getPath():
+    path = './src/data.db'
+    try:
+        sqlite3.connect(path)
+    except sqlite3.OperationalError:
+        path = '../src/data.db'
+    return path
 
 def connect():
-    path = os.path.abspath("../src/data.db")
+    path = getPath()
     return sqlite3.connect(path)
 
 
@@ -32,7 +39,7 @@ def createTables() -> None:
         idQuest INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
         question TEXT,
         proposition VARCHAR(250),
-        bonne_reponse TEXT,
+        bonneReponse TEXT,
         idQuizz TEXT,
         FOREIGN KEY(idQuizz) REFERENCES Quizz(idQuizz)
     )
@@ -53,7 +60,7 @@ def createTables() -> None:
     connection.commit()
     connection.close()
 
-def connect_user(username :str, password : str) -> False or list:
+def connectUser(username :str, password : str) -> False or list:
     connection = connect()
     cursor = connection.cursor()
     
@@ -69,27 +76,27 @@ def connect_user(username :str, password : str) -> False or list:
     else:
         return res
     
-def create_account(username :str, password : str,confirmPassword, estAdmin : int)-> None:
+def createAccount(username :str, password : str,confirmPassword, estAdmin : int)-> None:
     connection = connect()
     cursor = connection.cursor()
     try:
-        if password == confirmPassword:
-            cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''', (username, password, estAdmin))
-            connection.commit()
-            connection.close()
-            return (username, password, estAdmin)
-        else:
-            return False
+        
+        cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''', (username, password, estAdmin))
+        connection.commit()
+        connection.close()
+        return (username, password, estAdmin)
+    
+        
 
     except sqlite3.IntegrityError: #si l'utilisateur existe déjà
         return False
     
 def create_quizz(nameQuizz : str, ):
-        
     pass
     
+    
 if __name__ == '__main__':
-    print((create_account('gertrude', 'polytech', 'polytech', 1)))
+    print((create_account('freeze', 'polytech', 'polytech', 1)))
 
 
 # def queryQuestions(quizzName):
