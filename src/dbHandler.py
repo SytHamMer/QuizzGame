@@ -1,6 +1,8 @@
 import sqlite3
 from io import StringIO
 from json import dump,load
+import hashlib
+import datetime
 
 def getPath():
     path = './src/data.db'
@@ -13,6 +15,7 @@ def getPath():
 def connect():
     path = getPath()
     return sqlite3.connect(path)
+
 
 
 def createTables() -> None:
@@ -78,9 +81,10 @@ def connectUser(username :str, password : str) -> False or list:
     else:
         return res
     
-def createAccount(username :str, password : str,confirmPassword, estAdmin : int)-> None:
+def createAccount(username :str, password : str, estAdmin : int)-> bool:
     connection = connect()
     cursor = connection.cursor()
+    password = hashlib.md5(password.encode('utf-8')).hexdigest()
     try:
         
         cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''', (username, password, estAdmin))
@@ -93,7 +97,7 @@ def createAccount(username :str, password : str,confirmPassword, estAdmin : int)
     except sqlite3.IntegrityError: #si l'utilisateur existe déjà
         return False
     
-def createQuizz(nameQuizz : str, type : str):
+def createQuizz(nameQuizz : str, type : str)-> bool:
     connection = connect()
     cursor = connection.cursor()
     try:
@@ -105,7 +109,7 @@ def createQuizz(nameQuizz : str, type : str):
         return False
     
     
-def createQuestion(nameQuestion, listeProposition, bonneRep, idQuizz):
+def createQuestion(nameQuestion, listeProposition, bonneRep, idQuizz) -> True:
     connection = connect()
     cursor = connection.cursor()
     cursor.execute('PRAGMA foreign_keys=on;')
@@ -122,26 +126,51 @@ def createQuestion(nameQuestion, listeProposition, bonneRep, idQuizz):
         return False
     
 
-def majScore():
+def majScore(idQuizz,pseudo,nbpoints):
         
     connection = connect()
     cursor = connection.cursor()
     cursor.execute('PRAGMA foreign_keys=on;')
-    #serialize 'listeProposition'
-    buffer = StringIO()
-    res = dump(listeProposition, buffer)
-    listeProposition = buffer.getvalue()
+    currentDate = datetime.datetime.now()
     try:
-        cursor.execute('''insert into Questions(question, proposition, bonneReponse, idQuizz) values (?,?,?,?)''', (nameQuestion,listeProposition,bonneRep, idQuizz))
+        cursor.execute('''insert into Score(idQuizz, pseudo, nbpoints, date) values (?,?,?,?)''', (idQuizz,pseudo, nbpoints, currentDate))
         connection.commit()
         connection.close()
         return True
     except sqlite3.IntegrityError:
         return False
+
+def queryQuestions(idQuizz,idQuest)-> True or list:
+    connection = connect()
+    cursor = connection.cursor()
+    try:
+        res = cursor.execute('''select idQuest, question, proposition, bonneReponse, idQuizz from Questions where idQuizz=? and idQuest=?''', (idQuizz,idQuest))
+        connection.commit()
+        res =res.fetchone()
+        #désérialiser
+        res = list(res)
+        buffer = StringIO(res[2])
+        read = load(buffer)
+        res[2] = read
+        
+        return res
+    except sqlite3.IntegrityError:
+        return False
     
+def queryScore(pseudo):
+    connection = connect()
+    cursor = connection.cursor()
+    try:
+        res = cursor.execute('''select idScore,idQuizz,pseudo,nbpoints,date from Score where pseudo=?''', (pseudo,))
+        connection.commit()
+        res =res.fetchall()
+        print(res)
+    except sqlite3.IntegrityError:
+        return False
+    
+
 if __name__ == '__main__':
-    print(createQuizz('rugby', 'qcm'))
-    print((createQuestion('Qui est le meilleur club de rugby du monde ?', ['le lou', 'la rochelle', 'toulon', 'toulouse'], 'le lou', 'rugby')))
+    queryScore('ugo')
 
 
 # def queryQuestions(quizzName):
