@@ -10,7 +10,6 @@ class App:
         window.title("Quizz")
         window.geometry('1080x720')
         window.minsize(600, 400)
-        # window.iconbitmap('src/views/logo.ico')
         window.config(background=THEME['primary'])
 
         documents = {}
@@ -19,7 +18,7 @@ class App:
             doc = Frame(window, bg=THEME['primary'])
             documents[slug] = doc
             pageDefiner = pages[slug]
-            pageDefiner(self, doc)
+            pageDefiner(doc)
             doc.pack(expand=YES)
             doc.place(in_=window, x=0, y=0,
                       relwidth=1, relheight=1)
