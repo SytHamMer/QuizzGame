@@ -1,7 +1,9 @@
-from tkinter import * 
+from tkinter import *
+from unittest import result 
 from views.theme import THEME
 from store import store
 from dbHandler import queryScore
+
 
 class ScoreView:
     def __init__(self, document) -> None:
@@ -10,14 +12,26 @@ class ScoreView:
         self.__render()
     
     def getScore(self):
-        currentUser = store.getUser()
-        nbPoints = queryScore(currentUser[3])
-        return str(nbPoints)
+
+       return store.getScore()
+   
+    def getBestScore(self):
+        bestScore = 0
+        currentUser = 'ugo'
+        allScore = queryScore(currentUser)
+        for elt in allScore:
+            if elt[3] > bestScore:
+                bestScore = elt[3]
+        return bestScore
+            
+               
+
         
         
     def getHomeLink(self) -> None:
         store.getApp().setCurrentFrame('home')
         
+
     def __render(self):
         back = Frame(self.document, bg=THEME["lightBlue"],
                         borderwidth=0, height=471, width=450)
@@ -26,13 +40,15 @@ class ScoreView:
         lblTitle = Label(back, text='Score', bg=THEME["lightBlue"], fg='#FFFFFF', font=('Inter', 50))
         lblTitle.place(x=140, y=34)
         
-        self.lblScore = Label(back, text="12", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 50))
+        score = self.getScore()
+        self.lblScore = Label(back, text=f"{score}", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 50))
         self.lblScore.place(x=180, y=124)
         
         lblPoints = Label(back, text="points", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 15))
         lblPoints.place(x=195, y=190)
         
-        bestScoreLbl = Label(back, text="Your best : 13 points", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 15))
+        bestScore = self.getBestScore()
+        bestScoreLbl = Label(back, text=f"Your best : {bestScore} points", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 15))
         bestScoreLbl.place(x=40, y=290)
         
         BtnMenuLink = self.getHomeLink
