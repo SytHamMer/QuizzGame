@@ -1,8 +1,10 @@
 import sqlite3
+import os
 
 
 def connect():
-    return sqlite3.connect('../data.db')
+    path = os.path.abspath("../data.db")
+    return sqlite3.connect(path)
 
 
 def createTables() -> None:
