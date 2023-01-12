@@ -4,6 +4,7 @@ from json import dump,load
 import hashlib
 import datetime
 
+
 def getPath():
     path = './src/data.db'
     try:
@@ -11,6 +12,7 @@ def getPath():
     except sqlite3.OperationalError:
         path = '../src/data.db'
     return path
+
 
 def connect():
     path = getPath()
@@ -65,17 +67,18 @@ def createTables() -> None:
     connection.commit()
     connection.close()
 
-def connectUser(username :str, password : str) -> False or list:
+
+def connectUser(username: str, password: str) -> False or list:
     connection = connect()
     cursor = connection.cursor()
-    
-    
-    res = cursor.execute("""select pseudo,mdp, estAdmin from Utilisateur where pseudo=? and mdp=?""", (username,password))
-    connection.commit()    
-    
+
+    res = cursor.execute(
+        """select pseudo,mdp, estAdmin from Utilisateur where pseudo=? and mdp=?""", (username, password))
+    connection.commit()
+
     res = res.fetchone()
     connection.close()
-    
+
     if res == None:
         return False
     else:
@@ -86,15 +89,14 @@ def createAccount(username :str, password : str, estAdmin : int)-> bool:
     cursor = connection.cursor()
     password = hashlib.md5(password.encode('utf-8')).hexdigest()
     try:
-        
-        cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''', (username, password, estAdmin))
+
+        cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''',
+                       (username, password, estAdmin))
         connection.commit()
         connection.close()
         return True
-    
-        
 
-    except sqlite3.IntegrityError: #si l'utilisateur existe déjà
+    except sqlite3.IntegrityError:  # si l'utilisateur existe déjà
         return False
     
 def createQuizz(nameQuizz : str, type : str)-> bool:

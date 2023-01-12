@@ -13,13 +13,8 @@ app = App({
     'game': Game,
     'signin': SignIn,
     'signup': SignUp
-<<<<<<< HEAD
-
-}, 'game')
-=======
 }, 'signin')
 
 store.setApp(app)
 
->>>>>>> 95b84ba7119db293d42253148c7d0c4fed569e24
 app.start()

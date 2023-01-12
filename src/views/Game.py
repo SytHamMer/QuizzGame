@@ -5,29 +5,25 @@ from views.components.Question import Question
 from model.Timer import Timer
 
 
-
 class Game:
     def __init__(self, document):
 
         self.document = document
-        self.timer = Timer(60) 
+        self.timer = Timer(60)
 
-        
        # quizzName = 'foot'
-       # questions = queryQuestionFromDB(quizzName)  
-        
+       # questions = queryQuestionFromDB(quizzName)
+
         self.__render()
-
-
 
     def __render(self):
 
-        #Il manque gestion des questions et points
-        
-        questionnaire = Questionnaire(self.document,"test")
-        questionnaire.pack()
-        points = 0 
-        bottomframe = Frame(self.document,bg = THEME["primary"])
+        # Il manque gestion des questions et points
+
+        # questionnaire = Questionnaire(self.document,"test")
+        # questionnaire.pack()
+        points = 0
+        bottomframe = Frame(self.document, bg=THEME["primary"])
         timeleft = self.timer.getTime()[0]
         clock = Label(bottomframe, text=f"Time left :{timeleft}     ", bg=THEME["primary"], font=('Inter', 40),
                       fg=THEME["blueTopbar"], borderwidth=1)
