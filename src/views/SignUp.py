@@ -1,4 +1,5 @@
 from tkinter import *
+from dbHandler import createAccount
 from store import store
 from views.components.Topbar import Topbar
 from views.theme import THEME
@@ -11,20 +12,31 @@ class SignUp:
         self.userEntry: Entry | None = None
         self.pwEntry: Entry | None = None
         self.cpwEntry: Entry | None = None
+        self.checkboxVar: IntVar | None = None
         self.__render()
 
     def signUp(self) -> None:
-        pseudo = self.userEntry
+        pseudoEntry = self.userEntry
         pwEntry = self.pwEntry
         cpwEntry = self.cpwEntry
+        checkboxVar = self.checkboxVar
 
-        if (pseudo == None or pwEntry == None or cpwEntry == None):
+        if (pseudoEntry == None or pwEntry == None or cpwEntry == None or checkboxVar == None):
             raise Exception('One sign up is not defined')
 
-        if (pwEntry != cpwEntry):
+        pseudo = pseudoEntry.get()
+        pwd = pwEntry.get()
+        isAdmin = checkboxVar.get()
+
+        if (pwEntry.get() != cpwEntry.get()):
+            print('password are different')
             return
 
-        store.getApp().setCurrentFrame('home')
+        res = createAccount(pseudo, pwd, isAdmin)
+
+        if (res != False):
+            store.setUser(pseudo)
+            store.getApp().setCurrentFrame('home')
 
     def __render(self):
 
@@ -50,11 +62,15 @@ class SignUp:
         self.cpwEntry = cpwLblEntry.getEntry()
         cpwLblEntry.place(x=10, y=210)
 
+        checkboxVar = IntVar()
         checkAdmin = Checkbutton(
-            back, text='Administrateur', bg=THEME['lightBlue'], fg=THEME['blueTopbar'], font=('inter', 20))
+            back, text='Administrateur', bg=THEME['lightBlue'], fg=THEME['blueTopbar'], font=('inter', 20), variable=checkboxVar)
+        self.checkboxVar = checkboxVar
         checkAdmin.place(x=10, y=300)
 
         handleSignUp = self.signUp
         SignUpButton = Button(back, text='Sign Up', bg='#31468F', fg='white',
                               activebackground='#052B71',  font=('Inter', 20), command=handleSignUp)
         SignUpButton.place(x=350, y=360)
+
+        self.userEntry.focus_force()

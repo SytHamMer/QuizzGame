@@ -12,22 +12,6 @@ class App:
         window.minsize(600, 400)
         window.config(background=THEME['primary'])
 
-        documents = {}
-
-        for slug in pages.keys():
-            doc = Frame(window, bg=THEME['primary'])
-            documents[slug] = doc
-            pageDefiner = pages[slug]
-            pageDefiner(doc)
-            doc.pack(expand=YES)
-            doc.place(in_=window, x=0, y=0,
-                      relwidth=1, relheight=1)
-
-        """ 
-        Enable to know which frame is associatied to a page slug.
-        """
-        self.documents = documents
-
         """ 
         Enable to know which frame is associatied to a pageDefiner.
         """
@@ -45,11 +29,8 @@ class App:
     def getWindow(self) -> Tk:
         return self.window
 
-    def getDocument(self, slug) -> Frame:
-        doc = self.documents[slug]
-        if (doc == None):
-            raise Exception("No document is linked to the slug " + slug)
-        return doc
+    def getCurrentDocument(self) -> Frame:
+        return self.currentDocument
 
     def setCurrentFrame(self, slug) -> None:
         """Update the render of the App
@@ -57,11 +38,12 @@ class App:
         Args:
             slug (string): Slug of the new page.
         """
-        for currentSlug in self.pages.keys():
-            currentDoc = self.getDocument(currentSlug)
-            if (currentSlug == slug):
-                currentDoc.lift()
 
+        for widget in self.window.winfo_children():
+            widget.destroy()
+
+        pageDefiner = self.pages[slug]
+        self.currentDocument = pageDefiner(self.window)
         self.currentFrame = slug
 
     def getCurrentFrame(self) -> str:

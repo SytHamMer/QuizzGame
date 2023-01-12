@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+
 def getPath():
     path = './src/data.db'
     try:
@@ -8,6 +9,7 @@ def getPath():
     except sqlite3.OperationalError:
         path = '../src/data.db'
     return path
+
 
 def connect():
     path = getPath()
@@ -60,41 +62,43 @@ def createTables() -> None:
     connection.commit()
     connection.close()
 
-def connectUser(username :str, password : str) -> False or list:
+
+def connectUser(username: str, password: str) -> False or list:
     connection = connect()
     cursor = connection.cursor()
-    
-    
-    res = cursor.execute("""select pseudo,mdp, estAdmin from Utilisateur where pseudo=? and mdp=?""", (username,password))
-    connection.commit()    
-    
+
+    res = cursor.execute(
+        """select pseudo,mdp, estAdmin from Utilisateur where pseudo=? and mdp=?""", (username, password))
+    connection.commit()
+
     res = res.fetchone()
     connection.close()
-    
+
     if res == None:
         return False
     else:
         return res
-    
-def createAccount(username :str, password : str,confirmPassword, estAdmin : int)-> None:
+
+
+def createAccount(username: str, password: str, estAdmin: int) -> None:
     connection = connect()
     cursor = connection.cursor()
     try:
-        
-        cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''', (username, password, estAdmin))
+
+        cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''',
+                       (username, password, estAdmin))
         connection.commit()
         connection.close()
         return (username, password, estAdmin)
-    
-        
 
-    except sqlite3.IntegrityError: #si l'utilisateur existe déjà
+    except sqlite3.IntegrityError:  # si l'utilisateur existe déjà
         return False
-    
-def create_quizz(nameQuizz : str, ):
+
+
+def create_quizz(nameQuizz: str, ):
     pass
-    
-    
+
+
 if __name__ == '__main__':
     print((createAccount('brouette', 'polytech', 'polytech', 1)))
 
