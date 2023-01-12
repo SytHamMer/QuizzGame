@@ -37,6 +37,8 @@ class SignUp:
         if (res != False):
             store.setUser(pseudo)
             store.getApp().setCurrentFrame('home')
+        else:
+            print('Failed to create a new account.')
 
     def __render(self):
 

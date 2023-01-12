@@ -1,21 +1,19 @@
 from tkinter import *
 from views.theme import THEME
+from views.TabSystem import TabSystem
 
 
-class App:
+class App(TabSystem):
 
     def __init__(self, pages, defaultPage):
         window = Tk()
+        super().__init__(window, pages, defaultPage)
 
         window.title("Quizz")
         window.geometry('1080x720')
         window.minsize(600, 400)
         window.config(background=THEME['primary'])
 
-        """ 
-        Enable to know which frame is associatied to a pageDefiner.
-        """
-        self.pages = pages
         """
         Slug of the current displayed frame.
         """
@@ -29,25 +27,13 @@ class App:
     def getWindow(self) -> Tk:
         return self.window
 
-    def getCurrentDocument(self) -> Frame:
-        return self.currentDocument
-
     def setCurrentFrame(self, slug) -> None:
         """Update the render of the App
 
         Args:
             slug (string): Slug of the new page.
         """
-
-        for widget in self.window.winfo_children():
-            widget.destroy()
-
-        pageDefiner = self.pages[slug]
-        self.currentDocument = pageDefiner(self.window)
-        self.currentFrame = slug
-
-    def getCurrentFrame(self) -> str:
-        return self.currentFrame
+        self.setTab(slug)
 
     def start(self) -> None:
         self.window.mainloop()

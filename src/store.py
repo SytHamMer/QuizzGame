@@ -12,8 +12,6 @@ class Store:
         self.app = app
 
     def setUser(self, user: str | None):
-        print('set user')
-        print(user)
         self.user = user
 
     def getUser(self) -> str | None:
