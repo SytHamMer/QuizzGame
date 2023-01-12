@@ -22,11 +22,11 @@ class SignIn:
         back.pack(expand=YES)
 
         userLblEntry = LblEntry(
-            back, 'Username', '#7FB8ED', '#31468F', 28, 40, 20).getFrame()
+            back, 'Username', '#7FB8ED', '#31468F', 28, 40, 20)
         userLblEntry.place(x=60, y=82)
 
         pwLblEntry = LblEntry(back, 'Password', '#7FB8ED',
-                              '#31468F', 28, 40, 20, True).getFrame()
+                              '#31468F', 28, 40, 20, True)
         pwLblEntry.place(x=60, y=182)
 
         # pwLbl = Label(back, text='Password', bg='#7FB8ED', fg='#31468F', borderwidth=0, font=('Inter', 28))
