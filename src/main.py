@@ -8,7 +8,6 @@ from store import store
 
 createTables()
 
-
 app = App({
     'home': Home,
     'game': Game,

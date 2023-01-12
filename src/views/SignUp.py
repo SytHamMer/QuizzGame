@@ -1,17 +1,17 @@
 from tkinter import *
+from store import store
 from views.components.Topbar import Topbar
 from views.theme import THEME
 from views.components.LblEntry import LblEntry
 
 
 class SignUp:
-    def __init__(self, app, document):
-        self.app = app
+    def __init__(self, document):
         self.document = document
         self.__render()
 
     def handleClick(self) -> None:
-        self.app.setCurrentFrame('game')
+        store.getApp().setCurrentFrame('game')
 
     def __render(self):
 
