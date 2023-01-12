@@ -3,6 +3,7 @@ from dbHandler import connectUser
 from views.components.Topbar import Topbar
 from views.components.LblEntry import LblEntry
 from store import store
+import hashlib
 
 
 class SignIn:
@@ -21,6 +22,7 @@ class SignIn:
 
         pseudo = pseudoEntry.get()
         pwd = pwEntry.get()
+        pwd = hashlib.md5(pwd.encode('utf-8')).hexdigest()
 
         res = connectUser(pseudo, pwd)
 

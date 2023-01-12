@@ -17,7 +17,7 @@ app = App({
     'signup': SignUp,
     'creation': CreationQuizz,
     'score': ScoreView
-}, 'home')
+}, 'creation')
 
 store.setApp(app)
 
