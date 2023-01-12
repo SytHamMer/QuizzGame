@@ -2,7 +2,7 @@ from tkinter import *
 
 
 class TabSystem:
-    def __init__(self, tabContainer: Frame | Tk, contents, defaultTab: str):
+    def __init__(self, tabContainer, contents, defaultTab: str):
         self.tabContainer = tabContainer
         """ 
         Enable to know which tab is associatied to a contentDefiner.
