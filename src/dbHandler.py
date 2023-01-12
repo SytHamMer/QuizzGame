@@ -82,8 +82,9 @@ def create_account(username :str, password : str,confirmPassword, estAdmin : int
     except sqlite3.IntegrityError: #si l'utilisateur existe déjà
         return False
     
+def create_quizz(nameQuizz : str, ):
         
-    
+    pass
     
 if __name__ == '__main__':
     print((create_account('freeze', 'polytech', 'polytech', 1)))
