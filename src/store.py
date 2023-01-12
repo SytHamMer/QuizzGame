@@ -48,7 +48,7 @@ class Store:
     def getScore(self) -> str:
         score = self.score
         if score == None:
-            raise Exception("Score is not defined")
+           raise Exception("Score is not defined")
         return score
     
 
