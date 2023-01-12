@@ -68,7 +68,7 @@ def createTables() -> None:
     connection.close()
 
 
-def connectUser(username: str, password: str) -> False or list:
+def connectUser(username: str, password: str) -> bool or list:
     connection = connect()
     cursor = connection.cursor()
 
@@ -111,7 +111,7 @@ def createQuizz(nameQuizz : str, type : str)-> bool:
         return False
     
     
-def createQuestion(nameQuestion, listeProposition, bonneRep, idQuizz) -> True:
+def createQuestion(nameQuestion, listeProposition, bonneRep, idQuizz) -> bool:
     connection = connect()
     cursor = connection.cursor()
     cursor.execute('PRAGMA foreign_keys=on;')
@@ -142,7 +142,7 @@ def majScore(idQuizz,pseudo,nbpoints):
     except sqlite3.IntegrityError:
         return False
 
-def queryQuestions(idQuizz,idQuest)-> True or list:
+def queryQuestions(idQuizz,idQuest):
     connection = connect()
     cursor = connection.cursor()
     try:
