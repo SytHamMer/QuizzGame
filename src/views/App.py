@@ -18,7 +18,7 @@ class App:
             doc = Frame(window, bg=THEME['primary'])
             documents[slug] = doc
             pageDefiner = pages[slug]
-            pageDefiner(self, doc)
+            pageDefiner(doc)
             doc.pack(expand=YES)
             doc.place(in_=window, x=0, y=0,
                       relwidth=1, relheight=1)
