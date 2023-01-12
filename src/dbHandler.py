@@ -172,7 +172,7 @@ def queryScore(pseudo):
     
 
 if __name__ == '__main__':
-    createTables()
+    pass
 
 
 # def queryQuestions(quizzName):
