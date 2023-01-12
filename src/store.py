@@ -9,8 +9,7 @@ class Store:
         self.user: str | None = None
         self.app: App | None = None
         self.targetedQuizz: str | None = 'test'
-        self.score : str | None= None
-
+        self.score: str | None = None
 
     def setApp(self, app):
         self.app = app
@@ -50,7 +49,6 @@ class Store:
         if score == None:
             raise Exception("Score is not defined")
         return score
-    
 
 
 store = Store()
