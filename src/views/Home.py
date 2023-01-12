@@ -10,6 +10,7 @@ nbRows = nbQuizz//3
 
 class Home:
     def __init__(self, document):
+        print('HOMe is rendred')
         self.document = document
         self.__render()
 
