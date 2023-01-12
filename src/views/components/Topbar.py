@@ -26,7 +26,7 @@ class Topbar(Frame):
         homeLink = self.getHomeLink
         title = Button(self, font=('aria', 30, 'bold'),
                        text="Quizz", fg="steel blue", bd=0, anchor='w', command=homeLink)
-        title.pack(side="left")
+        title.pack(side="left", padx=20, pady=20)
 
         username = store.getUser()
         userIsLogged = username != None
@@ -47,10 +47,10 @@ class Topbar(Frame):
 
             signUpLink = self.getSignUpLink
             signUpBtn = Button(buttonContainer, text='Sign Up', bg='#31468F',
-                               fg='white', activebackground='#052B71',  font=('Inter', 40), command=signUpLink)
-            signUpBtn.pack(side="left")
+                               fg='black', activebackground='#052B71',  font=('Inter', 40), command=signUpLink)
+            signUpBtn.pack(side="left", padx=20, pady=20)
 
             signInLink = self.getSignInLink
             signInBtn = Button(buttonContainer, text='Sign In', bg='#31468F',
-                               fg='white', activebackground='#052B71',  font=('Inter', 40), command=signInLink)
-            signInBtn.pack(side='right')
+                               fg='black', activebackground='#052B71',  font=('Inter', 40), command=signInLink)
+            signInBtn.pack(side='right', padx=20, pady=20)
