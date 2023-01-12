@@ -10,6 +10,20 @@ class Game:
         self.app = app
         self.document = document
         self.timer = Timer(60) 
+        
+       # quizzName = 'foot'
+       # questions = queryQuestionFromDB(quizzName)  
+        
+        questionCards = list(map(questions, lambda x: Question(self,1,quizzName)))
+        
+        for slug in pages.keys():
+            doc = Frame(document, bg=THEME['primary'])
+            questionCard[slug] = doc
+            pageDefiner = pages[slug]
+            pageDefiner(self, doc)
+            doc.pack(expand=YES)
+            doc.place(in_=window, x=0, y=0,
+                      relwidth=1, relheight=1)
         self.__render()
 
     def __render(self):

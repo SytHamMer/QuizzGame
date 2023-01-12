@@ -3,7 +3,7 @@ import os
 
 
 def connect():
-    path = os.path.abspath("../data.db")
+    path = os.path.abspath("../src/data.db")
     return sqlite3.connect(path)
 
 
@@ -89,7 +89,7 @@ def create_quizz(nameQuizz : str, ):
     pass
     
 if __name__ == '__main__':
-    print((create_account('freeze', 'polytech', 'polytech', 1)))
+    print((create_account('gertrude', 'polytech', 'polytech', 1)))
 
 
 # def queryQuestions(quizzName):
