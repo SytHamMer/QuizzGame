@@ -96,7 +96,7 @@ def create_quizz(nameQuizz : str, ):
     
     
 if __name__ == '__main__':
-    print((create_account('freeze', 'polytech', 'polytech', 1)))
+    print((createAccount('brouette', 'polytech', 'polytech', 1)))
 
 
 # def queryQuestions(quizzName):
