@@ -7,6 +7,7 @@ class Store:
         self.selectedQuizz = None
         self.user: str | None = None
         self.app: App | None = None
+        self.targetedQuizz: str | None = 'test'
 
     def setApp(self, app):
         self.app = app
@@ -16,6 +17,15 @@ class Store:
 
     def getUser(self) -> str | None:
         return self.user
+
+    def targetQuizz(self, targetedQuizz: str | None):
+        self.targetedQuizz = targetedQuizz
+
+    def getTargetedQuizz(self) -> str:
+        quizzName = self.targetedQuizz
+        if (quizzName == None):
+            raise Exception('quizzName is not defined.')
+        return quizzName
 
     def userIsLogged(self) -> bool:
         return self.user != None

@@ -18,7 +18,11 @@ class TabSystem:
         Args:
             slug (string): Slug of the new tab.
         """
+        print('set tab')
+        print(slug)
+
         contentDefiner = self.contents[slug]
+        print(contentDefiner)
 
         if (contentDefiner == None):
             raise Exception('Error 404: tab not found.')

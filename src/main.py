@@ -13,7 +13,7 @@ app = App({
     'game': Game,
     'signin': SignIn,
     'signup': SignUp
-}, 'signin')
+}, 'home')
 
 store.setApp(app)
 
