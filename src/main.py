@@ -5,6 +5,7 @@ from views.Game import Game
 from views.Score import ScoreView
 from views.SignIn import SignIn
 from views.SignUp import SignUp
+from views.CreationQuizz import CreationQuizz
 from store import store
 
 createTables()
@@ -14,6 +15,7 @@ app = App({
     'game': Game,
     'signin': SignIn,
     'signup': SignUp,
+    'creation' : CreationQuizz,
     'score': ScoreView
 }, 'home')
 
