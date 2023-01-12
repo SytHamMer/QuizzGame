@@ -4,12 +4,12 @@ from views.theme import THEME
 class Question(Frame):
     """IN: num : INT, parent: Frame, question : STRING, reponses : liste STRING,bonnereponse: STRING
     OUT: FRAME"""
-    def __init__(self,parent,num,question,reponses,bonnereponse):
+    def __init__(self,parent,num,dico):
         self.parent = parent
         self.num=num
-        self.question =question
-        self.reponses = reponses
-        self.bonnereponse=bonnereponse
+        self.question =dico["question"]
+        self.reponses = dico["reponses"]
+        self.bonneReponse=dico["bonneReponse"]
         self.__render()
 
     def __render(self):
