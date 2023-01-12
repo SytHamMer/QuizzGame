@@ -39,31 +39,3 @@ class Question(Frame):
       
     def pack(self):
         super().grid(row=1)
-
-
-
-
-"""
-  buttons =  Frame(self, bg="#FBF8EE",borderwidth=0,height=450,width=855)
-        buttons.grid(row = 3,column = 1)
-        
-        but1  = Button(buttons, text=self.reponses[0],bg=THEME["lightBlue"], fg='white', 
-                       activebackground='#052B71',  font=('Inter', 40),borderwidth=0)
-        but2  = Button(buttons, text=self.reponses[1],bg=THEME["lightBlue"], fg='white', 
-                       activebackground='#052B71',  font=('Inter', 40),borderwidth=0)
-        but3  = Button(buttons, text=self.reponses[2],bg=THEME["lightBlue"], fg='white', 
-                       activebackground='#052B71',  font=('Inter', 40),borderwidth=0)
-        but4  = Button(buttons, text=self.reponses[3],bg=THEME["lightBlue"], fg='white', 
-                       activebackground='#052B71',  font=('Inter', 40),borderwidth=0)
-        
-        but1.grid(row= 1, column=1,padx=10,pady=10)
-        but2.grid(row= 1, column=2,padx=10,pady=10)
-        but3.grid(row= 2, column=1,padx=10,pady=10)
-        but4.grid(row= 2, column=2,padx=10,pady=10)
-        
-        lblNumQuestion = Label(self,text = f"Question {self.num}:",bg= THEME["blueTopbar"],fg= 'white')
-        lblNumQuestion.grid(row=1,column=1)
-        lblQuestion = Label(self,text = self.question,bg=THEME["primary"],fg=THEME["blueTopbar"])
-        lblQuestion.grid(row=2,column=2)
-
-"""
