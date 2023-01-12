@@ -2,7 +2,9 @@ import time
 from datetime import datetime as dt
 
 #This class will start a timer at the moment the object is create ! 
-
+##################
+#Class dont use anymore
+##################
 class Timer: 
 
     def __init__(self,duration):
@@ -16,8 +18,8 @@ class Timer:
     def getTime(self):
         """OUT: 
         A tuple:
-        [0] : if timer is finish or not
-        [1] : time left, since the begining of the timer"""
+        [1] : if timer is finish or not
+        [0] : time left, since the begining of the timer"""
         timeleft = self.timing - (int(time.time()) - self.start)
         res =(timeleft,True)
         if timeleft<0:
