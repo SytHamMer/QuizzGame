@@ -28,8 +28,13 @@ class ScoreView:
 
         
         
-    def getHomeLink(self) -> None:
+    def exitScore(self):
+        """Update score and targetQuizz and leave the page
+        """
+        store.targetQuizz(None)
+        store.setScore(None)
         store.getApp().setCurrentFrame('home')
+        
         
 
     def __render(self):
@@ -51,7 +56,7 @@ class ScoreView:
         bestScoreLbl = Label(back, text=f"Your best : {bestScore} points", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 15))
         bestScoreLbl.place(x=40, y=290)
         
-        BtnMenuLink = self.getHomeLink
+        BtnMenuLink = self.exitScore
         btnMenu = Button(back, text="Menu", bg=THEME['lightBlue'], fg='#FFFFFF', font=('Inter', 20), padx=30, pady=10, bd=4,command=BtnMenuLink)
         btnMenu.place(x=40, y=390)
         
