@@ -1,5 +1,6 @@
 import sqlite3
-import os
+from io import StringIO
+from json import dump,load
 
 def getPath():
     path = './src/data.db'
@@ -15,9 +16,10 @@ def connect():
 
 
 def createTables() -> None:
+    
     connection = connect()
     cursor = connection.cursor()
-
+    cursor.execute('PRAGMA foreign_keys=on;')
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS Utilisateur(
         pseudo TEXT PRIMARY KEY UNIQUE,
@@ -84,19 +86,62 @@ def createAccount(username :str, password : str,confirmPassword, estAdmin : int)
         cursor.execute('''insert into Utilisateur(pseudo,mdp,estAdmin) values (?,?,?)''', (username, password, estAdmin))
         connection.commit()
         connection.close()
-        return (username, password, estAdmin)
+        return True
     
         
 
     except sqlite3.IntegrityError: #si l'utilisateur existe déjà
         return False
     
-def create_quizz(nameQuizz : str, ):
-    pass
+def createQuizz(nameQuizz : str, type : str):
+    connection = connect()
+    cursor = connection.cursor()
+    try:
+        cursor.execute('''insert into Quizz(idQuizz,type) values (?,?)''', (nameQuizz, type))
+        connection.commit()
+        connection.close()
+        return True
+    except sqlite3.IntegrityError:
+        return False
     
+    
+def createQuestion(nameQuestion, listeProposition, bonneRep, idQuizz):
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute('PRAGMA foreign_keys=on;')
+    #serialize 'listeProposition'
+    buffer = StringIO()
+    res = dump(listeProposition, buffer)
+    listeProposition = buffer.getvalue()
+    try:
+        cursor.execute('''insert into Questions(question, proposition, bonneReponse, idQuizz) values (?,?,?,?)''', (nameQuestion,listeProposition,bonneRep, idQuizz))
+        connection.commit()
+        connection.close()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    
+
+def majScore():
+        
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute('PRAGMA foreign_keys=on;')
+    #serialize 'listeProposition'
+    buffer = StringIO()
+    res = dump(listeProposition, buffer)
+    listeProposition = buffer.getvalue()
+    try:
+        cursor.execute('''insert into Questions(question, proposition, bonneReponse, idQuizz) values (?,?,?,?)''', (nameQuestion,listeProposition,bonneRep, idQuizz))
+        connection.commit()
+        connection.close()
+        return True
+    except sqlite3.IntegrityError:
+        return False
     
 if __name__ == '__main__':
-    print((createAccount('brouette', 'polytech', 'polytech', 1)))
+    print(createQuizz('rugby', 'qcm'))
+    print((createQuestion('Qui est le meilleur club de rugby du monde ?', ['le lou', 'la rochelle', 'toulon', 'toulouse'], 'le lou', 'rugby')))
 
 
 # def queryQuestions(quizzName):
