@@ -48,6 +48,6 @@ class QuestionFrame(Frame) :
     def getData(self):
         listAnswer = [self.ans1.get(), self.ans2.get(), self.ans3.get(), self.answerEntry.get()]
         random.shuffle(listAnswer)
-        dico = {'question' : self.entryQuestion.get(), 'reponses' : listAnswer, 'bonneReponse': self.answerEntry}
+        dico = {'question' : self.entryQuestion.get(), 'reponses' : listAnswer, 'bonneReponse': self.answerEntry.get()}
         return dico
         

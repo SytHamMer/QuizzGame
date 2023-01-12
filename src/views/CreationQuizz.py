@@ -16,6 +16,8 @@ class CreationQuizz :
         self.length = 2
         self.listeQuestion = []
         self.nom = None
+        self.q1 = None
+        self.q2 = None
         self.__render()
 
     def addQuestionFrame(self):
@@ -28,17 +30,21 @@ class CreationQuizz :
         self.mainFrame.update_idletasks()
         bbox = self.canvas.bbox(ALL)  # Get bounding box of canvas with Buttons.
         self.canvas.configure(scrollregion=bbox, width=2060, height=1080)
-        self.listeQuestion.append(newQuestion.getData())
+        self.listeQuestion.append(newQuestion)
         print(container.winfo_width())
 
     
     def initialisationQuizz(self):
         
         createQuizz(self.nom.getEntry().get(), 'qcm')
-        
-        for i in range(0, self.length):
+        q1Data = self.q1.getData()
+        print(q1Data)
+        createQuestion(q1Data['question'], q1Data['reponses'], q1Data['bonneReponse'], self.nom.getEntry().get())
+        q2Data = self.q2.getData()
+        createQuestion(q2Data['question'], q2Data['reponses'], q2Data['bonneReponse'], self.nom.getEntry().get())
+        for i in range(2, self.length):
             print(i)
-            quest = self.listeQuestion[i]
+            quest = self.listeQuestion[i].getData()
             print(quest)
             createQuestion(quest['question'], quest['reponses'], quest['bonneReponse'], self.nom.getEntry().get())
         store.getApp().setCurrentFrame('home')
@@ -100,11 +106,11 @@ class CreationQuizz :
         self.questionFrameContainer = questionFrameContainer
         questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
 
-        q1 = QuestionFrame(1,parent=questionFrameContainer)
-        q1.grid(column=0, row=0, padx = 50, pady = 10)
+        self.q1 = QuestionFrame(1,parent=questionFrameContainer)
+        self.q1.grid(column=0, row=0, padx = 50, pady = 10)
 
-        q2 = QuestionFrame(2,parent=questionFrameContainer)
-        q2.grid(column=1, row=0, padx = 50, pady = 10)
+        self.q2 = QuestionFrame(2,parent=questionFrameContainer)
+        self.q2.grid(column=1, row=0, padx = 50, pady = 10)
 
         handleAddQuestion = self.addQuestionFrame
         addBtn = Button(f3, text='New Question', bg=THEME['lightBlue'], fg =THEME['blueTopbar'], font=("Inter", 50, 'bold'), command=handleAddQuestion)
@@ -113,8 +119,9 @@ class CreationQuizz :
 
         submitBtnLink = self.initialisationQuizz
         
-        submitBtn = Button(f3, text='Submit', font=("Inter", 50, 'bold'), command=submitBtnLink)
-        submitBtn.grid(column=0, row=2)
+        submitBtn = Button(f3, text='Submit', bg=THEME['lightBlue'], fg =THEME['blueTopbar'], font=("Inter", 50, 'bold'), command=submitBtnLink)
+        submitBtn.grid(column=1, row=2)
+
 
 
         canvas.create_window((0,0), window=mainFrame, anchor=NW)
