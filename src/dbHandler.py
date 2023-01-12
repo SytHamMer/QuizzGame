@@ -166,13 +166,13 @@ def queryScore(pseudo):
         res = cursor.execute('''select idScore,idQuizz,pseudo,nbpoints,date from Score where pseudo=?''', (pseudo,))
         connection.commit()
         res =res.fetchall()
-        print(res)
+        return res
     except sqlite3.IntegrityError:
         return False
     
 
 if __name__ == '__main__':
-    queryScore('ugo')
+    pass
 
 
 # def queryQuestions(quizzName):
