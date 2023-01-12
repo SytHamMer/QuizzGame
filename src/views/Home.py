@@ -19,30 +19,33 @@ class Home:
 
     def __render(self) -> None:
 
+        #ajout de la topbar
         topbar = Topbar(self.document)
         topbar.pack()
 
-        back = Frame(
-            self.document, bg=THEME['blueTopbar'], borderwidth=0, height=450, width=1080)
+        #creation de la frame en dessous de la topbar
+        back = Frame(self.document,bg= THEME['blueTopbar'], borderwidth=0,height=450,width=1080)
         back.pack(fill=BOTH)
 
         back.grid_rowconfigure(0, weight=1)
         back.grid_columnconfigure(0, weight=1)
 
+        #creation d'une canvas pour la scrollbar
         canvas = Canvas(back, bg=THEME['primary'])
         canvas.grid(row=0, column=0)
 
+        #creation scrollbar
         scrollbar = Scrollbar(back, orient=VERTICAL, command=canvas.yview)
         scrollbar.grid(row=0, column=1, sticky=NS)
         canvas.configure(yscrollcommand=scrollbar.set)
 
+        #
         mainFrame = Frame(canvas)
         mainFrame.grid_rowconfigure(0, weight=1)
         mainFrame.grid_columnconfigure(0, weight=1)
         mainFrame.grid_rowconfigure(1, weight=1)
 
-        f1 = Frame(mainFrame, bg=THEME['primary'],
-                   borderwidth=0, height=100, width=1080)
+        f1 = Frame(mainFrame,bg= THEME['primary'], borderwidth=0,height=100,width=1080)
         f1.grid(row=0)
 
         homeLbl = Label(f1, text='Tous les quizz :',

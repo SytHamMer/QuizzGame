@@ -18,9 +18,6 @@ class LblEntry(Frame):
             self.entry = Entry(self, width=entWidth, font=('inter', sizeEnt))
         self.lbl.pack(side="left")
         self.entry.pack(side="right")
-
-        # Fix an issue on page refereshed
-        self.entry.focus_force()
-
+    
     def getEntry(self) -> Entry:
         return self.entry
