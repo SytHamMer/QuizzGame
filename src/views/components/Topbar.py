@@ -7,6 +7,9 @@ class Topbar(Frame):
     def __init__(self, parent) -> None:
         super().__init__(parent, bg=THEME['blueTopbar'], height=150)
 
+    def getHomeLink(self) -> None:
+        store.getApp().setCurrentFrame('home')
+
     def getSignUpLink(self) -> None:
         store.getApp().setCurrentFrame('signup')
 
@@ -19,8 +22,10 @@ class Topbar(Frame):
 
     def pack(self) -> None:
         super().pack(side="top", fill="x")
-        title = Label(self, font=('aria', 30, 'bold'),
-                      text="Quizz", fg="steel blue", bd=10, anchor='w')
+
+        homeLink = self.getHomeLink
+        title = Button(self, font=('aria', 30, 'bold'),
+                       text="Quizz", fg="steel blue", bd=0, anchor='w', command=homeLink)
         title.pack(side="left")
 
         username = store.getUser()
