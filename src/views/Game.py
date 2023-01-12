@@ -1,6 +1,7 @@
 import threading
 import time
 from tkinter import *
+from store import store
 from views.components.Questionnaire import Questionnaire
 from views.theme import THEME
 from views.components.Question import Question
@@ -13,6 +14,7 @@ class Game:
         self.document = document
         self.timer = 10 #take value of time in the creation of quizz
         self.finish = False
+        self.score = 0
 
 
 
@@ -21,7 +23,12 @@ class Game:
 
 
 
-        
+    def exit(self):
+        """Leave the Quizz at the end of it
+        """
+        # store.setScore(self.score)
+        store.getApp().setCurrentFrame("score")
+             
     def __render(self):
 
         def update_label(remaining):

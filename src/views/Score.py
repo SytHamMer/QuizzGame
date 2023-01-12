@@ -15,6 +15,9 @@ class ScoreView:
         return str(nbPoints)
         
         
+    def getHomeLink(self) -> None:
+        store.getApp().setCurrentFrame('home')
+        
     def __render(self):
         back = Frame(self.document, bg=THEME["lightBlue"],
                         borderwidth=0, height=471, width=450)
@@ -32,7 +35,8 @@ class ScoreView:
         bestScoreLbl = Label(back, text="Your best : 13 points", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 15))
         bestScoreLbl.place(x=40, y=290)
         
-        btnMenu = Button(back, text="Menu", bg=THEME['lightBlue'], fg='#FFFFFF', font=('Inter', 20), padx=30, pady=10, bd=4)
+        BtnMenuLink = self.getHomeLink
+        btnMenu = Button(back, text="Menu", bg=THEME['lightBlue'], fg='#FFFFFF', font=('Inter', 20), padx=30, pady=10, bd=4,command=BtnMenuLink)
         btnMenu.place(x=40, y=390)
         
         btnReplay = Button(back, text="Replay", bg='#31468F', fg='#FFFFFF', font=('Inter', 20), padx=30, pady=10, bd=4)
