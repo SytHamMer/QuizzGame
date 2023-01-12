@@ -21,7 +21,7 @@ class Store:
     def getUser(self):
         return self.user
 
-    def targetQuizz(self, targetedQuizz: str | None):
+    def targetQuizz(self, targetedQuizz):
         self.targetedQuizz = targetedQuizz
 
     def getTargetedQuizz(self) -> str:

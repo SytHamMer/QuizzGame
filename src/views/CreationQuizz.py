@@ -4,6 +4,8 @@ from views.components.Topbar import Topbar
 from views.components.LblEntry import LblEntry
 from views.components.QuestionFrame import QuestionFrame
 from views.theme import THEME
+from dbHandler import *
+from store import store
 
 class CreationQuizz :
     def __init__(self, document):
@@ -12,6 +14,8 @@ class CreationQuizz :
         self.mainFrame=None
         self.questionFrameContainer = None
         self.length = 0
+        self.listeQuestion = []
+        self.nom = None
         self.__render()
 
     def addQuestionFrame(self):
@@ -24,8 +28,19 @@ class CreationQuizz :
         self.mainFrame.update_idletasks()
         bbox = self.canvas.bbox(ALL)  # Get bounding box of canvas with Buttons.
         self.canvas.configure(scrollregion=bbox, width=2060, height=1080)
+        self.listeQuestion.append(newQuestion.getData())
+        
     
-
+    def initialisationQuizz(self):
+        
+        createQuizz(self.nom.getEntry().get(), 'qcm')
+        
+        for i in range(0, self.length):
+            print(i)
+            quest = self.listeQuestion[i]
+            print(quest)
+            createQuestion(quest['question'], quest['reponses'], quest['bonneReponse'], self.nom.getEntry().get())
+        store.getApp().setCurrentFrame('home')
     def __render(self) -> None:
 
         #ajout de la topbar
@@ -65,8 +80,8 @@ class CreationQuizz :
         f2 = Frame(mainFrame,bg= THEME['primary'], borderwidth=0, height=200, width=1080)
         f2.grid(row=1, sticky=N+E+W+S)
 
-        nom = LblEntry(f2, lblText='Nom', lblBgColor= THEME['primary'], lblFgColor=THEME['blueTopbar'], policeSize=20, entWidth= 20, sizeEnt=20)
-        nom.grid(column=0, row=1, padx= 10)
+        self.nom = LblEntry(f2, lblText='Nom', lblBgColor= THEME['primary'], lblFgColor=THEME['blueTopbar'], policeSize=20, entWidth= 20, sizeEnt=20)
+        self.nom.grid(column=0, row=1, padx= 10)
 
         image = LblEntry(f2, lblText='Image', lblBgColor= THEME['primary'], lblFgColor=THEME['blueTopbar'], policeSize=20, entWidth= 20, sizeEnt=20)
         image.grid(column=1, row=1)
@@ -89,7 +104,9 @@ class CreationQuizz :
         addBtn = Button(f3, text='+', font=("Inter", 50, 'bold'), command=handleAddQuestion)
         addBtn.grid(column=0, row=2, sticky = W)
 
-        submitBtn = Button(f3, text='Submit', font=("Inter", 50, 'bold'))
+        submitBtnLink = self.initialisationQuizz
+        
+        submitBtn = Button(f3, text='Submit', font=("Inter", 50, 'bold'), command=submitBtnLink)
         submitBtn.grid(column=0, row=2, sticky = E)
 
         canvas.create_window((0,0), window=mainFrame, anchor=NW)
