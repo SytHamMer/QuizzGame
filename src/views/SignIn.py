@@ -1,5 +1,6 @@
 from tkinter import *
 from views.components.Topbar import Topbar
+from views.components.LblEntry import LblEntry
 class SignIn:
     def __init__(self, app, document):
         self.app = app
@@ -18,17 +19,19 @@ class SignIn:
         back = Frame(self.document,bg= "#7FB8ED", borderwidth=0,height=450,width=855)
         back.pack(expand=YES)
 
-        userLbl = Label(back, text='Username', bg='#7FB8ED', fg='#31468F', borderwidth=0, font=('Inter', 28))
-        userLbl.place(x=60, y=82)
-
-        userEntry=Entry(back, width=40, font=('arial',20))
-        userEntry.place(x=240, y=82)
-
-        pwLbl = Label(back, text='Password', bg='#7FB8ED', fg='#31468F', borderwidth=0, font=('Inter', 28))
-        pwLbl.place(x=60, y=182)
         
-        pwEntry= Entry(back, width=40, font=('arial',20))
-        pwEntry.place(x=240, y=182)
+        
+        userLblEntry = LblEntry(back,'Username','#7FB8ED', '#31468F', 28,40,20).getFrame()
+        userLblEntry.place(x=60, y=82)
+
+        pwLblEntry = LblEntry(back,'Password','#7FB8ED', '#31468F', 28,40,20, True).getFrame()
+        pwLblEntry.place(x=60, y=182)
+
+        # pwLbl = Label(back, text='Password', bg='#7FB8ED', fg='#31468F', borderwidth=0, font=('Inter', 28))
+        # pwLbl.place(x=60, y=182)
+        
+        # pwEntry= Entry(back, width=40, font=('arial',20))
+        # pwEntry.place(x=240, y=182)
 
         
 
