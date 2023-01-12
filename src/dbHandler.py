@@ -1,9 +1,16 @@
 import sqlite3
 import os
 
+def getPath():
+    path = './src/data.db'
+    try:
+        sqlite3.connect(path)
+    except sqlite3.OperationalError:
+        path = '../src/data.db'
+    return path
 
 def connect():
-    path = os.path.abspath("./src/data.db")
+    path = getPath()
     return sqlite3.connect(path)
 
 
@@ -32,7 +39,7 @@ def createTables() -> None:
         idQuest INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
         question TEXT,
         proposition VARCHAR(250),
-        bonne_reponse TEXT,
+        bonneReponse TEXT,
         idQuizz TEXT,
         FOREIGN KEY(idQuizz) REFERENCES Quizz(idQuizz)
     )
@@ -85,8 +92,8 @@ def createAccount(username :str, password : str,confirmPassword, estAdmin : int)
         return False
     
 def create_quizz(nameQuizz : str, ):
-        
     pass
+    
     
 if __name__ == '__main__':
     print((createAccount('test2', 'polytech', 'polytech', 1)))
