@@ -26,9 +26,11 @@ class CreationQuizz :
         questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
 
         q1 = QuestionFrame(1,parent=questionFrameContainer)
+        self.q1 = q1
         q1.grid(column=0, row=0, padx = 50, pady = 10)
 
         q2 = QuestionFrame(2,parent=questionFrameContainer)
+        self.q2 = q2
         q2.grid(column=1, row=0, padx = 50, pady = 10)
 
     
