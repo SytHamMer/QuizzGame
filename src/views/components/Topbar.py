@@ -1,4 +1,5 @@
 from tkinter import *
+from dbHandler import createQuizz
 from store import store
 from views.theme import THEME
 
@@ -19,6 +20,8 @@ class Topbar(Frame):
     def deconnect(self) -> None:
         store.setUser(None)
         store.getApp().setCurrentFrame('home')
+    def createQuizzLink(self):
+        store.getApp().setCurrentFrame('creation')
 
     def pack(self) -> None:
         super().pack(side="top", fill="x")
@@ -40,6 +43,10 @@ class Topbar(Frame):
             deconnectBtn = Button(self, text='Log Out', bg='#31468F',
                                   fg='white', activebackground='#052B71',  font=('Inter', 40), command=handleDeconnect)
             deconnectBtn.pack(side="right")
+            if store.isAdmin():
+                handleCreationQuizz = self.createQuizzLink
+                createQuizzBtn = Button(self, text='Create Quizz', font=('aria', 30, 'bold'), fg='steel blue', bd=0, anchor='w', command=handleCreationQuizz)
+                createQuizzBtn.pack(side='right', padx=40, pady=40)
         else:
             buttonContainer = Frame(
                 self, bg="#7FB8ED", borderwidth=0, height=450, width=855)

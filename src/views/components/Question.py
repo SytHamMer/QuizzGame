@@ -40,16 +40,16 @@ class Question(Frame):
                       activebackground='#052B71',  font=('Inter', 40), borderwidth=0, height=1, width=10, command=handleChangeBt4)
 
         but1.grid(row=3, column=1, padx=5, pady=20)
-        but2.grid(row=3, column=4, padx=5, pady=20)
+        but2.grid(row=3, column=3, padx=5, pady=20)
         but3.grid(row=4, column=1, padx=5, pady=10)
-        but4.grid(row=4, column=4, padx=5, pady=10)
+        but4.grid(row=4, column=3, padx=5, pady=10)
 
         lblNumQuestion = Label(
             self, text=f"Question {self.num}:", bg=THEME["blueTopbar"], fg='white', font=('Inter', 40))
         lblNumQuestion.grid(row=1, column=0)
         lblQuestion = Label(self, text=self.question,
                             bg=THEME["primary"], fg=THEME["blueTopbar"], font=('Inter', 40))
-        lblQuestion.grid(row=2, column=3)
+        lblQuestion.grid(row=2, column=1,columnspan=3)
 
     def pack(self):
         super().grid(row=1)
