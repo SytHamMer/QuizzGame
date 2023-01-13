@@ -11,7 +11,7 @@ class Store:
         self.selectedQuizz = None
         self.user: str | None = None
         self.app: App | None = None
-        self.targetedQuizz: str | None = 'test'
+        self.targetedQuizz: str | None
         self.score: str | None = None
 
     def setApp(self, app):
