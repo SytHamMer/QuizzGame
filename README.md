@@ -21,15 +21,26 @@ We use [tkinter](https://docs.python.org/fr/3/library/tk.html) in order to make 
 
 We use [sqlite3](https://docs.python.org/3/library/sqlite3.html) in order to create a database where we can find all questions, users and admin
 
-###Model
+### Model
+
+
 
 ### Commit
 
 In order to create a logic in our project we structure our commits names in categories :
  - **Features** : For all new class, fonction, files features add
  - **Fix** : For any edition in differents fonctions create
- - **Clear** : Add comments, delete tests lines 
+ - **Clean** : Clean the code by creating code/structure/names/adding comments/deleting test lines
 
+### How to contribute ?
+
+1. Fork the project.
+2. clone it on your machine.
+3. Apply changes.
+4. `git add .`
+5. `git commit -m "Feature|Fix|Clean:..."`
+6. `git push -u origin main`
+7. Submit a pull request.
 
 ## License
 
