@@ -5,6 +5,7 @@ from views.App import App
 import sqlite3
 
 
+
 class Store:
     def __init__(self):
         self.selectedQuizz = None
@@ -51,7 +52,7 @@ class Store:
         if score == None:
            raise Exception("Score is not defined")
         return score
-
+    
     def isAdmin(self):
         connection = connect()
         cursor = connection.cursor()
@@ -62,5 +63,7 @@ class Store:
 
         res = res.fetchone()
         connection.close()
-        return (res[2] == 1) 
+        return (res[2] == 1)
+
+
 store = Store()
