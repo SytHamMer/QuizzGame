@@ -19,7 +19,19 @@ class CreationQuizz :
         self.q1 = None
         self.q2 = None
         self.__render()
+    
+    def initQuestionContainer(self, parent):
+        questionFrameContainer = Frame(parent, bg='red')
+        self.questionFrameContainer = questionFrameContainer
+        questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
 
+        q1 = QuestionFrame(1,parent=questionFrameContainer)
+        q1.grid(column=0, row=0, padx = 50, pady = 10)
+
+        q2 = QuestionFrame(2,parent=questionFrameContainer)
+        q2.grid(column=1, row=0, padx = 50, pady = 10)
+
+    
     def addQuestionFrame(self):
         container = self.questionFrameContainer
         if(container == None):
@@ -105,22 +117,21 @@ class CreationQuizz :
         self.questionFrameContainer = questionFrameContainer
         questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
 
-        self.q1 = QuestionFrame(1,parent=questionFrameContainer)
-        self.q1.grid(column=0, row=0, padx = 50, pady = 10)
+        q1 = QuestionFrame(1,parent=questionFrameContainer)
+        q1.grid(column=0, row=0, padx = 50, pady = 10)
 
-        self.q2 = QuestionFrame(2,parent=questionFrameContainer)
-        self.q2.grid(column=1, row=0, padx = 50, pady = 10)
+        q2 = QuestionFrame(2,parent=questionFrameContainer)
+        q2.grid(column=1, row=0, padx = 50, pady = 10)
 
         handleAddQuestion = self.addQuestionFrame
-        addBtn = Button(f3, text='New Question', bg=THEME['lightBlue'], fg =THEME['blueTopbar'], font=("Inter", 50, 'bold'), command=handleAddQuestion)
+        addBtn = Button(f3, text='New Question', bg=THEME['blueTopbar'], fg ='white', font=("Inter", 50, 'bold'), command=handleAddQuestion)
         addBtn.grid(column=0, row=2)
-
+        
 
         submitBtnLink = self.initialisationQuizz
         
-        submitBtn = Button(f3, text='Submit', bg=THEME['lightBlue'], fg =THEME['blueTopbar'], font=("Inter", 50, 'bold'), command=submitBtnLink)
+        submitBtn = Button(f3, text='Submit', font=("Inter", 50, 'bold'), command=submitBtnLink)
         submitBtn.grid(column=1, row=2)
-
 
 
         canvas.create_window((0,0), window=mainFrame, anchor=NW)
