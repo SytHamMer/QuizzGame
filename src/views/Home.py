@@ -4,18 +4,44 @@ from store import store
 from views.components.Topbar import Topbar
 from views.theme import THEME
 
-nbQuizz = 10
-nbRows = nbQuizz//3
-
+def adaptText(string, nbChar, nbLignes):
+    res = ""
+    l=1
+    while len(string)>nbChar and l<nbLignes: 
+        res += string[0:nbChar] + "\n"
+        string = string[nbChar:len(string)]
+        l+=1
+    if len(string)>nbChar :
+        string = string[0:nbChar]
+    print(res+string)
+    return res + string
 
 class Home:
     def __init__(self, document):
         print('HOMe is rendred')
+        self.nbQuizz= 10 #CHANGER EN LIANT A LA BASE DE DONNEES
         self.document = document
+        self.mainFrame = None
         self.__render()
 
     def handleClick(self) -> None:
         store.getApp().setCurrentFrame('game')
+
+    def initializeQuizzFrame(self) -> None:
+        """method to initialize the frame containing every buttons that links to the quizz"""
+        nbQuizz = self.nbQuizz
+        #Frame creation
+        f2 = Frame(self.mainFrame, bg=THEME['primary'], borderwidth=0, width=1080)
+        f2.grid(row=1, sticky=N+S+E+W)
+
+        handler = self.handleClick #Button command
+
+        for i in range(0, nbQuizz):
+            quizzName = "Quizz" #CHANGER EN LIANT A LA BASE DE DONNEES
+            text=adaptText(quizzName, 12, 3)
+            btn = Button(f2, text=text, bg=THEME['lightBlue'], fg=THEME['blueTopbar'], padx=50, pady=50, font=(
+                'Inter', 20, 'bold'), activebackground=THEME['blueTopbar'], activeforeground='white', width= 10, height=3, command=handler)
+            btn.grid(row=i//3, column=i % 3, padx=20, pady=20)
 
     def __render(self) -> None:
 
@@ -42,6 +68,7 @@ class Home:
 
         #
         mainFrame = Frame(canvas)
+        self.mainFrame = mainFrame
         mainFrame.grid_rowconfigure(0, weight=1)
         mainFrame.grid_columnconfigure(0, weight=1)
         mainFrame.grid_rowconfigure(1, weight=1)
@@ -54,17 +81,14 @@ class Home:
                         bg=THEME['primary'], fg=THEME['blueTopbar'], borderwidth=0, font=('Inter', 28, 'bold'))
         homeLbl.place(x=20, y=20)
 
-        f2 = Frame(mainFrame, bg=THEME['primary'], borderwidth=0, width=1080)
-        f2.grid(row=1, sticky=N+S+E+W)
+        self.initializeQuizzFrame()
 
-        handler = self.handleClick
 
-        for i in range(0, nbQuizz):
-            btn = Button(f2, text="Quizz", bg=THEME['lightBlue'], fg=THEME['blueTopbar'], padx=100, pady=50, font=(
-                'Inter', 20, 'bold'), activebackground=THEME['blueTopbar'], activeforeground='white', command=handler)
-            btn.grid(row=i//3, column=i % 3, padx=20, pady=20)
+
+       
 
         canvas.create_window((0, 0), window=mainFrame, anchor=NW)
         mainFrame.update_idletasks()  # Needed to make bbox info available.
         bbox = canvas.bbox(ALL)  # Get bounding box of canvas with Buttons.
         canvas.configure(scrollregion=bbox, width=2060, height=720)
+
