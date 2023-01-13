@@ -106,11 +106,13 @@ class Game:
     def __render(self):
 
         topFrame = Frame(self.document, bg=THEME["primary"])
-        question1 = {"question": "Qui est jaune ?", "reponses": [
-            "poussin", "camion", "elephant", "poisson"], "bonneReponse": "poussin"}
-        question2 = {"question": "Qui est un urluberlu ? ", "reponses": [
-            "Lila", "Mathys", "Ugo", "Arnaud"], "bonneReponse": "Mathys"}
-        questions = [question1, question2]
+        
+        # for quizz in self.quizz
+        # question1 = {"question": "Qui est jaune ?", "reponses": [
+        #     "poussin", "camion", "elephant", "poisson"], "bonneReponse": "poussin"}
+        # question2 = {"question": "Qui est un urluberlu ? ", "reponses": [
+        #     "Lila", "Mathys", "Ugo", "Arnaud"], "bonneReponse": "Mathys"}
+        questions = queryQuestions(self.quizzName)
         quizz = {}
 
         handleChange = self.onChange

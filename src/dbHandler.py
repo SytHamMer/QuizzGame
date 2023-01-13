@@ -142,20 +142,33 @@ def majScore(idQuizz,pseudo,nbpoints):
     except sqlite3.IntegrityError:
         return False
 
-def queryQuestions(idQuizz,idQuest):
+def queryQuestions(idQuizz):
     connection = connect()
     cursor = connection.cursor()
     try:
-        res = cursor.execute('''select idQuest, question, proposition, bonneReponse, idQuizz from Questions where idQuizz=? and idQuest=?''', (idQuizz,idQuest))
+        res = cursor.execute('''select idQuest, question, proposition, bonneReponse, idQuizz from Questions where idQuizz=?''', (idQuizz,))
         connection.commit()
-        res =res.fetchone()
-        #désérialiser
-        res = list(res)
-        buffer = StringIO(res[2])
-        read = load(buffer)
-        res[2] = read
+        res =res.fetchall()
+       
+        result = []
+        i = 0
+        for quest in res:
+
+            buffer = StringIO(quest[2])
+            read = load(buffer)
+            listeProposition = read
+
+            result.append( {
+                'question': quest[1],
+                'reponses': listeProposition,
+                'bonneReponse' : quest[3],
+                'idQuizz' : quest[4]
+            })
+            i+=1
         
-        return res
+        
+        
+        return result
     except sqlite3.IntegrityError:
         return False
     
@@ -185,7 +198,7 @@ def queryScore(pseudo):
 
 
 if __name__ == '__main__':
-    pass
+    print(queryQuestions('gg'))
 
 
 # def queryQuestions(quizzName):
