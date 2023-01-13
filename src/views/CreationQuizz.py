@@ -38,14 +38,12 @@ class CreationQuizz :
         
         createQuizz(self.nom.getEntry().get(), 'qcm')
         q1Data = self.q1.getData()
-        print(q1Data)
         createQuestion(q1Data['question'], q1Data['reponses'], q1Data['bonneReponse'], self.nom.getEntry().get())
         q2Data = self.q2.getData()
         createQuestion(q2Data['question'], q2Data['reponses'], q2Data['bonneReponse'], self.nom.getEntry().get())
-        for i in range(2, self.length):
-            print(i)
+        
+        for i in range(0, len(self.listeQuestion)):
             quest = self.listeQuestion[i].getData()
-            print(quest)
             createQuestion(quest['question'], quest['reponses'], quest['bonneReponse'], self.nom.getEntry().get())
         store.getApp().setCurrentFrame('home')
     def __render(self) -> None:
