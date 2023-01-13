@@ -169,7 +169,8 @@ def queryScore(pseudo):
         return res
     except sqlite3.IntegrityError:
         return False
-    
+
+
 
 if __name__ == '__main__':
     pass
