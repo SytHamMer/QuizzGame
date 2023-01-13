@@ -17,7 +17,19 @@ class CreationQuizz :
         self.listeQuestion = []
         self.nom = None
         self.__render()
+    
+    def initQuestionContainer(self, parent):
+        questionFrameContainer = Frame(parent, bg='red')
+        self.questionFrameContainer = questionFrameContainer
+        questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
 
+        q1 = QuestionFrame(1,parent=questionFrameContainer)
+        q1.grid(column=0, row=0, padx = 50, pady = 10)
+
+        q2 = QuestionFrame(2,parent=questionFrameContainer)
+        q2.grid(column=1, row=0, padx = 50, pady = 10)
+
+    
     def addQuestionFrame(self):
         container = self.questionFrameContainer
         if(container == None):
@@ -42,6 +54,8 @@ class CreationQuizz :
             print(quest)
             createQuestion(quest['question'], quest['reponses'], quest['bonneReponse'], self.nom.getEntry().get())
         store.getApp().setCurrentFrame('home')
+
+    
     def __render(self) -> None:
 
         #ajout de la topbar
@@ -96,25 +110,17 @@ class CreationQuizz :
         questionLbl = Label(f3, text='Questions :', bg=THEME['primary'], fg=THEME['blueTopbar'], borderwidth=0, font=('Inter', 28, 'bold'))
         questionLbl.grid(row=0, sticky=NW)
 
-        questionFrameContainer = Frame(f3, bg='red')
-        self.questionFrameContainer = questionFrameContainer
-        questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
-
-        q1 = QuestionFrame(1,parent=questionFrameContainer)
-        q1.grid(column=0, row=0, padx = 50, pady = 10)
-
-        q2 = QuestionFrame(2,parent=questionFrameContainer)
-        q2.grid(column=1, row=0, padx = 50, pady = 10)
+        self.initQuestionContainer(f3)
 
         handleAddQuestion = self.addQuestionFrame
-        addBtn = Button(f3, text='New Question', bg=THEME['lightBlue'], fg =THEME['blueTopbar'], font=("Inter", 50, 'bold'), command=handleAddQuestion)
+        addBtn = Button(f3, text='New Question', bg=THEME['blueTopbar'], fg ='white', font=("Inter", 50, 'bold'), command=handleAddQuestion)
         addBtn.grid(column=0, row=2)
-
+        
 
         submitBtnLink = self.initialisationQuizz
         
-        submitBtn = Button(f3, text='Submit', font=("Inter", 50, 'bold'), command=submitBtnLink)
-        submitBtn.grid(column=0, row=2)
+        submitBtn = Button(f3, text='Submit', bg=THEME['lightBlue'], fg =THEME['blueTopbar'], font=("Inter", 50, 'bold'), command=submitBtnLink)
+        submitBtn.grid(column=1, row=2)
 
 
         canvas.create_window((0,0), window=mainFrame, anchor=NW)
