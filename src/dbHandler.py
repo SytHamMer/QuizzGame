@@ -159,6 +159,18 @@ def queryQuestions(idQuizz,idQuest):
     except sqlite3.IntegrityError:
         return False
     
+    
+def queryQuizzs():
+    connection = connect()
+    cursor = connection.cursor()
+    try:
+        res = cursor.execute('''select idQuizz, type, image from Quizz''')
+        connection.commit()
+        res = res.fetchall()
+        return res
+    except sqlite3.IntegrityError:
+        return False
+        
 def queryScore(pseudo):
     connection = connect()
     cursor = connection.cursor()
@@ -169,7 +181,8 @@ def queryScore(pseudo):
         return res
     except sqlite3.IntegrityError:
         return False
-    
+
+
 
 if __name__ == '__main__':
     pass

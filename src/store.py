@@ -1,7 +1,9 @@
 # put here global data we need at anytime
 from logging import exception
-from views.App import App
 from dbHandler import *
+from views.App import App
+import sqlite3
+
 
 
 class Store:
