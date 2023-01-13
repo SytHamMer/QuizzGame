@@ -46,6 +46,7 @@ class CreationQuizz :
             quest = self.listeQuestion[i].getData()
             createQuestion(quest['question'], quest['reponses'], quest['bonneReponse'], self.nom.getEntry().get())
         store.getApp().setCurrentFrame('home')
+        
     def __render(self) -> None:
 
         #ajout de la topbar

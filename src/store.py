@@ -1,6 +1,8 @@
 # put here global data we need at anytime
 from logging import exception
+from dbHandler import *
 from views.App import App
+import sqlite3
 
 
 class Store:
@@ -50,5 +52,15 @@ class Store:
            raise Exception("Score is not defined")
         return score
 
+    def isAdmin(self):
+        connection = connect()
+        cursor = connection.cursor()
 
+        res = cursor.execute(
+            """select pseudo,mdp, estAdmin from Utilisateur where pseudo=?""", (self.user,))
+        connection.commit()
+
+        res = res.fetchone()
+        connection.close()
+        return (res[2] == 1) 
 store = Store()
