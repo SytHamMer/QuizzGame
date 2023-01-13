@@ -2,7 +2,7 @@ from getpass import getuser
 import threading
 import time
 from tkinter import *
-from dbHandler import majScore
+from dbHandler import *
 from store import store
 from views.TabSystem import TabSystem
 from views.theme import THEME
@@ -54,8 +54,12 @@ class Game:
         """Leave the Quizz at the end of it
         """
         store.setScore(self.score)
-        majScore(self.quizz,getuser(),self.score)
-        print(getuser())
+        majScore(store.getTargetedQuizz(),store.getUser(),self.score)
+        print(store.getUser())
+        print("JSUIS LA")
+        print(store.getTargetedQuizz())
+        print(self.score)
+        print(majScore(store.getTargetedQuizz(),store.getUser(),self.score))
         store.getApp().setCurrentFrame("score")
 
     def __displayBottom(self):
