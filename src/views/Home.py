@@ -1,6 +1,7 @@
 from tkinter import *
 from store import store
 
+from dbHandler import *
 from views.components.Topbar import Topbar
 from views.theme import THEME
 
@@ -18,14 +19,11 @@ def adaptText(string, nbChar, nbLignes):
 
 class Home:
     def __init__(self, document):
-        print('HOMe is rendred')
-        self.nbQuizz= 10 #CHANGER EN LIANT A LA BASE DE DONNEES
+        self.nbQuizz= len(queryQuizzs())
         self.document = document
         self.mainFrame = None
         self.__render()
 
-    def handleClick(self) -> None:
-        store.getApp().setCurrentFrame('game')
 
     def initializeQuizzFrame(self) -> None:
         """method to initialize the frame containing every buttons that links to the quizz"""
@@ -34,13 +32,16 @@ class Home:
         f2 = Frame(self.mainFrame, bg=THEME['primary'], borderwidth=0, width=1080)
         f2.grid(row=1, sticky=N+S+E+W)
 
-        handler = self.handleClick #Button command
-
         for i in range(0, nbQuizz):
-            quizzName = "Quizz" #CHANGER EN LIANT A LA BASE DE DONNEES
+            quizzName = queryQuizzs()[i][0]
+            def handleClick(name=quizzName):
+                if not store.userIsLogged():
+                    return
+                store.targetQuizz(name)
+                store.getApp().setCurrentFrame('game')
             text=adaptText(quizzName, 12, 3)
             btn = Button(f2, text=text, bg=THEME['lightBlue'], fg=THEME['blueTopbar'], padx=50, pady=50, font=(
-                'Inter', 20, 'bold'), activebackground=THEME['blueTopbar'], activeforeground='white', width= 10, height=3, command=handler)
+                'Inter', 20, 'bold'), activebackground=THEME['blueTopbar'], activeforeground='white', width= 10, height=3, command=handleClick)
             btn.grid(row=i//3, column=i % 3, padx=20, pady=20)
 
     def __render(self) -> None:
