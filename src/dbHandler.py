@@ -184,11 +184,11 @@ def queryQuizzs():
     except sqlite3.IntegrityError:
         return False
         
-def queryScore(pseudo):
+def queryScore(pseudo, idQuizz):
     connection = connect()
     cursor = connection.cursor()
     try:
-        res = cursor.execute('''select idScore,idQuizz,pseudo,nbpoints,date from Score where pseudo=?''', (pseudo,))
+        res = cursor.execute('''select idScore,idQuizz,pseudo,nbpoints,date from Score where pseudo=? and idQuizz=?''', (pseudo,idQuizz))
         connection.commit()
         res =res.fetchall()
         return res
@@ -198,7 +198,7 @@ def queryScore(pseudo):
 
 
 if __name__ == '__main__':
-    print(queryQuestions('gg'))
+    print(queryScore('jojodu69', 'fkjdn'))
 
 
 # def queryQuestions(quizzName):
