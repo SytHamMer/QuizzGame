@@ -25,13 +25,13 @@ class CreationQuizz :
         self.questionFrameContainer = questionFrameContainer
         questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
 
-        q1 = QuestionFrame(1,parent=questionFrameContainer)
-        self.q1 = q1
-        q1.grid(column=0, row=0, padx = 50, pady = 10)
+        self.q1 = QuestionFrame(1,parent=questionFrameContainer)
+        
+        self.q1.grid(column=0, row=0, padx = 50, pady = 10)
 
-        q2 = QuestionFrame(2,parent=questionFrameContainer)
-        self.q2 = q2
-        q2.grid(column=1, row=0, padx = 50, pady = 10)
+        self.q2 = QuestionFrame(2,parent=questionFrameContainer)
+        
+        self.q2.grid(column=1, row=0, padx = 50, pady = 10)
 
     
     def addQuestionFrame(self):
@@ -119,11 +119,11 @@ class CreationQuizz :
         self.questionFrameContainer = questionFrameContainer
         questionFrameContainer.grid(columnspan=2, row=1, sticky=N+S+E+W)
 
-        q1 = QuestionFrame(1,parent=questionFrameContainer)
-        q1.grid(column=0, row=0, padx = 50, pady = 10)
+        self.q1 = QuestionFrame(1,parent=questionFrameContainer)
+        self.q1.grid(column=0, row=0, padx = 50, pady = 10)
 
-        q2 = QuestionFrame(2,parent=questionFrameContainer)
-        q2.grid(column=1, row=0, padx = 50, pady = 10)
+        self.q2 = QuestionFrame(2,parent=questionFrameContainer)
+        self.q2.grid(column=1, row=0, padx = 50, pady = 10)
 
         handleAddQuestion = self.addQuestionFrame
         addBtn = Button(f3, text='New Question', bg=THEME['blueTopbar'], fg ='white', font=("Inter", 50, 'bold'), command=handleAddQuestion)

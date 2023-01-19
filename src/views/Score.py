@@ -17,8 +17,8 @@ class ScoreView:
    
     def getBestScore(self):
         bestScore = 0
-        currentUser = 'ugo'
-        allScore = queryScore(currentUser)
+        currentUser = store.getUser()
+        allScore = queryScore(currentUser, store.getTargetedQuizz())
         for elt in allScore:
             if elt[3] > bestScore:
                 bestScore = elt[3]
@@ -56,6 +56,7 @@ class ScoreView:
         lblPoints.place(x=195, y=190)
         
         bestScore = self.getBestScore()
+        print(bestScore)
         bestScoreLbl = Label(back, text=f"Your best : {bestScore} points", bg=THEME["lightBlue"], fg='#31468F', font=('Inter', 15))
         bestScoreLbl.place(x=40, y=290)
         

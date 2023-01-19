@@ -55,11 +55,6 @@ class Game:
         """
         store.setScore(self.score)
         majScore(store.getTargetedQuizz(),store.getUser(),self.score)
-        print(store.getUser())
-        print("JSUIS LA")
-        print(store.getTargetedQuizz())
-        print(self.score)
-        print(majScore(store.getTargetedQuizz(),store.getUser(),self.score))
         store.getApp().setCurrentFrame("score")
 
     def __displayBottom(self):
