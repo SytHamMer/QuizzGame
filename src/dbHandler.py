@@ -198,7 +198,7 @@ def queryScore(pseudo, idQuizz):
 
 
 if __name__ == '__main__':
-    print(queryScore('jojodu69', 'fkjdn'))
+    pass
 
 
 # def queryQuestions(quizzName):
